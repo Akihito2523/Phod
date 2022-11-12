@@ -34,6 +34,42 @@
             </objects>
             <point key="canvasLocation" x="965" y="97"/>
         </scene>
+        <!--Test View Controller-->
+        <scene sceneID="j9D-Ei-vdc">
+            <objects>
+                <viewController id="W40-5F-Cx5" customClass="TestViewController" customModule="Phod" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dTU-Bg-Ef8">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LxD-7K-Hpl">
+                                <rect key="frame" x="120" y="260" width="150" height="51"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="写真送信">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="31"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="photoSend:" destination="W40-5F-Cx5" eventType="touchUpInside" id="SFs-DA-Tv8"/>
+                                </connections>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="10" translatesAutoresizingMaskIntoConstraints="NO" id="S0q-Y7-vtS">
+                                <rect key="frame" x="75" y="442" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="CiZ-wO-tEr"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="S0q-Y7-vtS" id="RDK-9h-xN9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8I6-GX-sd3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2197" y="58"/>
+        </scene>
         <!--setting-->
         <scene sceneID="pkR-VI-dSE">
             <objects>
@@ -93,7 +129,7 @@
                     <tabBarItem key="tabBarItem" title="photo" image="camera.fill" catalog="system" id="5k7-wc-XFT"/>
                     <connections>
                         <outlet property="CameraImageView" destination="31X-TV-lZl" id="dp7-QF-EZU"/>
-                        <outlet property="cameraButton" destination="EfW-mc-niG" id="8Hu-BW-xJd"/>
+                        <outlet property="cameraButton" destination="EfW-mc-niG" id="gop-Xi-zFd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WHx-8g-n3g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -121,6 +157,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="10" width="1619" height="1080"/>
         <image name="camera.fill" catalog="system" width="128" height="93"/>
         <image name="gearshape.fill" catalog="system" width="128" height="123"/>
         <image name="photo.on.rectangle.fill" catalog="system" width="128" height="98"/>

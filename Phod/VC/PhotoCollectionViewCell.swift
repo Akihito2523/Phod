@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class PhotoCollectionViewCell: UICollectionViewCell {
     static let identifier = "PhotoCollectionViewCell"
     
@@ -31,6 +32,7 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         ].compactMap({ $0 })
         imageView.image = images.randomElement()
     }
+    
     
     required init?(coder: NSCoder){
         fatalError()
