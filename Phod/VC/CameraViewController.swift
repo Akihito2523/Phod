@@ -13,24 +13,14 @@ import Alamofire
 import KeychainAccess
 
 
-
 class CameraViewController: UIViewController {
-    
-    
     
     //Constantsに格納しておいた定数を使うための用意
     let consts = Constants.shared
     //Webの認証セッションを入れておく変数
     var session: ASWebAuthenticationSession?
-    //読み込んできたアクセストークンを格納しておく変数
-    private var token = ""
     
-    
-    
-    
-    
-    var articles: [Phod] = []
-    var user: User!
+  
     
     // カメラ表示用imageview
     @IBOutlet weak var CameraImageView: UIImageView!
@@ -54,16 +44,12 @@ class CameraViewController: UIViewController {
     
     
     override func viewWillAppear(_ animated: Bool) {
-//        requestIndex()
+        //        requestIndex()
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //token読み込み
-        token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiY2IyMWVlY2YzNjY5M2E4NzRmOTM4ZDNkMTBlY2M3NDViN2NjZTFhYzE0MWY0NzY2NmNjZmYwZTY5NmM1YTliMGQxZjc5ODg2ZWVjMDIwN2UiLCJpYXQiOjE2NjgyMTY4MjIuNDIyMjM4LCJuYmYiOjE2NjgyMTY4MjIuNDIyMjQxLCJleHAiOjE2OTk3NTI4MjIuMzc1MDA0LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.NuWYdraNTzKQn2zzEtIfohdH0Agrj_yuzfqoHusIdu7JsX8Qs4eEMQIaUZrF2GrJxwNOofGJgeb8Rx97pp7BBLoT0111F3xK6u404yR_pcYuNCKczgivGWX_EyQ0QhSEGP4QAygSeTA9DzxTCH029NtH2pzMSyK8xfXrhng4dkSSQ_Z-jxpUVHYU19H1WNX0i5MPlXfAcGQC1x01tfLxI11Dwi0oON2eJNDxIT3T_tf8-gAAh9nhIrsUv0q4UuqOzTP5iOsfirqCyhyUosxNVF4-xQTpue1iYLJvXm2vBOhF8IEb2LB5cm_M02d2EOHiy8I2yaijHgsMud-bMqLWCNtyhLQFNV6IBg9ZqgBZVPYvwAv1oIBrDgYkAW6p0MNF4yQQmihPGtFzp-PH6MUVNLeGMd3Id4jyTD1ekfMOneKC3gF2kjlLqLrjfty1p1mpxKnop_6vaug3q2tVyB8K9cF-iykvJcTWcudYBE0GQVnMJNMi9zGQjb37dO0Pzq15cyYPZbqm1KTK6fv-Ymv9Urnw4__5IQutxRUxLxkLAGQIX18WRahLABsETsy6WZT4mKZmf9p3qNIEK8fU0sMhEQ4Z3YaIANzxgHrQlZ7dLZopay2tV88ehZUdDfVu2b7Bslq2WWWQaG52eJ8YZjxHqb1jYm54AzS0V66dnk7Z05s"
-        
         
         self.styleCaptureButton()
         setupCaptureSession()
@@ -79,11 +65,7 @@ class CameraViewController: UIViewController {
     }
     
     
-    
-   
-    
-    
-    
+    //シャッターボタン
     @IBAction func cameraButtonTaped(_ sender: Any) {
         print("シャッターボタンが押されました。")
         let settings = AVCapturePhotoSettings()
@@ -94,9 +76,8 @@ class CameraViewController: UIViewController {
         // 撮影された画像をdelegateメソッドで処理
         self.photoOutput?.capturePhoto(with: settings, delegate: self as! AVCapturePhotoCaptureDelegate)
         
-        
 //        if  CameraImageView.image != nil {
-//            createRequest(token: token, image: CameraImageView.image!)
+//            createRequest(token: consts.token, image: CameraImageView.image!)
 //            print("写真送信完了")
 //        } else {
 //            print("送信エラー")
@@ -123,8 +104,8 @@ class CameraViewController: UIViewController {
                 //image,title,bodyを送信
                 multipartFormData.append(imageData, withName: "image", fileName: ".jpg")
                 //guard let titleTextData = self.titleTextField.text?.data(using: .utf8) else {return}
-                multipartFormData.append("テストtitle".data(using: .utf8)!, withName: "title")
-                multipartFormData.append("テストbody".data(using: .utf8)!, withName: "body")
+                multipartFormData.append("Swiftのtitle".data(using: .utf8)!, withName: "title")
+                multipartFormData.append("Swiftのbody".data(using: .utf8)!, withName: "body")
             },
             to: url,
             //uploadはデフォルトがPOSTメソッドなので省略可能
@@ -143,7 +124,6 @@ class CameraViewController: UIViewController {
     }
     
     
-    
 }
 
 
@@ -158,8 +138,8 @@ extension CameraViewController: AVCapturePhotoCaptureDelegate{
             guard let uiImage = UIImage(data: imageData) else {return}
             
             print("画像取得！")
-//            createRequest(token: token, image: uiImage)
-
+            createRequest(token: consts.token, image: uiImage)
+            
             // 写真ライブラリに画像を保存
             UIImageWriteToSavedPhotosAlbum(uiImage, nil,nil,nil)
         }

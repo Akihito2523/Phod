@@ -33,7 +33,6 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         imageView.image = images.randomElement()
     }
     
-    
     required init?(coder: NSCoder){
         fatalError()
     }

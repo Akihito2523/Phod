@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct Camera: Codable {
+struct Album: Codable {
     let data: [Phod]?
 }
