@@ -11,12 +11,14 @@ import Foundation
 struct Phod: Codable {
     let id: Int
     let title: String
-    let place: String?
+    let place: String
     let image: String
     let body: String
     let createdAt: String
     let userName: String
     let imageUrl: String
+    let tagType: String
+
     
     enum CodingKeys:  String, CodingKey {
         case id
@@ -27,5 +29,6 @@ struct Phod: Codable {
         case createdAt = "created_at"
         case userName = "user_name"
         case imageUrl = "image_url"
+        case tagType = "tag_type"
     }
 }

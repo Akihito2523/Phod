@@ -96,22 +96,19 @@ import KeychainAccess
         ).responseDecodable(of: Album.self) { response in
             switch response.result {
             case .success(let phods):
-                print("resoponse")
+                print("レスポンス")
                 if let phod = phods.data {
                     self.phods = phod
                     print(self.phods)
+//                    print(self.phods.first?.place)
                     //self.collectionView.reloadData()
                     print(phods.data?.count)
-                    self.imageView.kf.setImage(with: URL(string: self.phods.first!.imageUrl))
+                    self.imageView.kf.setImage(with: URL(string: "self.phods.first!.imageUrl"))
                     
 //                    self.imageView.kf.setImage(with: URL(string: self.phods.))
-                    func value()->String {
-                        var gre = self.phods.first?.imageUrl
-                        return "gre"
-                    }
                   
                 } else {
-                    print("elseに入っています")
+                    print("データが入っていません")
                 }
             case .failure(let err):
                 print(err)

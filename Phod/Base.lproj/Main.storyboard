@@ -17,13 +17,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EP9-oY-dM5">
-                                <rect key="frame" x="0.0" y="47" width="390" height="748"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EP9-oY-dM5">
+                                <rect key="frame" x="0.0" y="47" width="390" height="797"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="sIT-CY-NYI"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="EP9-oY-dM5" firstAttribute="leading" secondItem="sIT-CY-NYI" secondAttribute="leading" id="EIb-ej-GJr"/>
+                            <constraint firstItem="EP9-oY-dM5" firstAttribute="top" secondItem="sIT-CY-NYI" secondAttribute="top" id="Juq-Uf-pbG"/>
+                            <constraint firstItem="EP9-oY-dM5" firstAttribute="trailing" secondItem="sIT-CY-NYI" secondAttribute="trailing" id="dUB-is-r32"/>
+                            <constraint firstAttribute="bottom" secondItem="EP9-oY-dM5" secondAttribute="bottom" id="rAP-rv-WJN"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="album" image="photo.on.rectangle.fill" catalog="system" id="VVd-gi-hbY"/>
                     <connections>
@@ -168,10 +173,8 @@
                                     <action selector="cameraButtonTaped:" destination="b67-vk-BQk" eventType="touchUpInside" id="J4p-E5-Ecj"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="タグ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0bX-Ur-gNm">
-                                <rect key="frame" x="299" y="126" width="47" height="28"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="タグ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0bX-Ur-gNm">
+                                <rect key="frame" x="171.66666666666666" y="77" width="47" height="28"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -180,7 +183,9 @@
                         <viewLayoutGuide key="safeArea" id="cDb-jk-077"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="0bX-Ur-gNm" firstAttribute="centerX" secondItem="IhJ-sB-bGc" secondAttribute="centerX" id="6Lk-gG-nWR"/>
                             <constraint firstItem="EfW-mc-niG" firstAttribute="top" secondItem="cDb-jk-077" secondAttribute="top" constant="600" id="BJm-Wj-EFI"/>
+                            <constraint firstItem="0bX-Ur-gNm" firstAttribute="top" secondItem="cDb-jk-077" secondAttribute="top" constant="30" id="WpG-1f-bAf"/>
                             <constraint firstItem="EfW-mc-niG" firstAttribute="centerX" secondItem="IhJ-sB-bGc" secondAttribute="centerX" id="wZx-vZ-hjG"/>
                         </constraints>
                     </view>
@@ -188,6 +193,7 @@
                     <connections>
                         <outlet property="CameraImageView" destination="31X-TV-lZl" id="dp7-QF-EZU"/>
                         <outlet property="cameraButton" destination="EfW-mc-niG" id="gop-Xi-zFd"/>
+                        <outlet property="tagView" destination="0bX-Ur-gNm" id="QgJ-HW-wIH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WHx-8g-n3g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -221,9 +227,6 @@
         <image name="photo.on.rectangle.fill" catalog="system" width="128" height="98"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

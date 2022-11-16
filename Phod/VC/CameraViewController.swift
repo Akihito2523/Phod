@@ -15,19 +15,19 @@ import KeychainAccess
 
 class CameraViewController: UIViewController {
     
+    
     //Constantsに格納しておいた定数を使うための用意
     let consts = Constants.shared
     //Webの認証セッションを入れておく変数
     var session: ASWebAuthenticationSession?
     
-  
-    
+    //タブ
+    @IBOutlet weak var tagView: UILabel!
     // カメラ表示用imageview
     @IBOutlet weak var CameraImageView: UIImageView!
     //カメラボタンプロパティ
     @IBOutlet weak var cameraButton: UIButton!
     //@IBOutlet weak var changeModeSegmentControl: UISegmentedControl!
-    
     
     // デバイスからの入力と出力を管理するオブジェクトの作成
     var captureSession = AVCaptureSession()
@@ -48,8 +48,13 @@ class CameraViewController: UIViewController {
     }
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tagView.text = ""
+        //スワイプ
+        swipe()
         
         self.styleCaptureButton()
         setupCaptureSession()
@@ -58,6 +63,22 @@ class CameraViewController: UIViewController {
         setupPreviewLayer()
         captureSession.startRunning()
     }
+    
+    //スワイプ時に実行されるメソッド
+    @objc func didSwipe(_ sender: UISwipeGestureRecognizer) {
+        //スワイプ方向による実行処理をcase文で指定
+        switch sender.direction {
+        case .up:
+            tagView.text = ""
+            print("上スワイプ")
+        case .down:
+            tagView.text = "デフォルトタグ"
+            print("下スワイプ")
+        default:
+            break
+        }
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -76,12 +97,12 @@ class CameraViewController: UIViewController {
         // 撮影された画像をdelegateメソッドで処理
         self.photoOutput?.capturePhoto(with: settings, delegate: self as! AVCapturePhotoCaptureDelegate)
         
-//        if  CameraImageView.image != nil {
-//            createRequest(token: consts.token, image: CameraImageView.image!)
-//            print("写真送信完了")
-//        } else {
-//            print("送信エラー")
-//        }
+        //        if  CameraImageView.image != nil {
+        //            createRequest(token: consts.token, image: CameraImageView.image!)
+        //            print("写真送信完了")
+        //        } else {
+        //            print("送信エラー")
+        //        }
         
     }
     
@@ -105,6 +126,7 @@ class CameraViewController: UIViewController {
                 multipartFormData.append(imageData, withName: "image", fileName: ".jpg")
                 //guard let titleTextData = self.titleTextField.text?.data(using: .utf8) else {return}
                 multipartFormData.append("Swiftのtitle".data(using: .utf8)!, withName: "title")
+                multipartFormData.append("Swiftのplace".data(using: .utf8)!, withName: "place")
                 multipartFormData.append("Swiftのbody".data(using: .utf8)!, withName: "body")
             },
             to: url,
@@ -155,6 +177,25 @@ extension CameraViewController{
         cameraButton.layer.borderWidth = 5
         cameraButton.clipsToBounds = true
         cameraButton.layer.cornerRadius = min(cameraButton.frame.width, cameraButton.frame.height) / 2
+    }
+    
+    //スワイプ
+    func swipe(){
+        //上スワイプ用のインスタンスを生成する
+        let upSwipe = UISwipeGestureRecognizer(
+            target: self,
+            action: #selector(CameraViewController.didSwipe(_:))
+        )
+        upSwipe.direction = .up
+        self.view.addGestureRecognizer(upSwipe)
+        
+        //下スワイプ用のインスタンスを生成する
+        let downSwipe = UISwipeGestureRecognizer(
+            target: self,
+            action: #selector(CameraViewController.didSwipe(_:))
+        )
+        downSwipe.direction = .down
+        self.view.addGestureRecognizer(downSwipe)
     }
     
     // カメラの画質の設定
@@ -220,3 +261,5 @@ extension CameraViewController{
         self.view.layer.insertSublayer(self.cameraPreviewLayer!, at: 0)
     }
 }
+
+
