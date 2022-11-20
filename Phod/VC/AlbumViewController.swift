@@ -13,16 +13,17 @@ import KeychainAccess
 
 
 //class AlbumViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
-    class AlbumViewController: UIViewController {
+
+class AlbumViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     let consts = Constants.shared
     var user: User!
     var phods: [Phod] = []
     
-
+    var count = 0
+    
     var imageArray : Array<UIImage> = []
-
+    var stringArray : Array<String> = []
     
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var imageView: UIImageView!
@@ -32,15 +33,29 @@ import KeychainAccess
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.identifier)
-//        collectionView.delegate = self
-//        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.dataSource = self
         view.addSubview(collectionView)
+        
+        // セルのレイアウト設定
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 120, height: 100)
+        layout.minimumInteritemSpacing = 3
+        collectionView.collectionViewLayout = layout
+        
         
         // 画像を配列に格納
         while let attackImage = UIImage(named: "\(imageArray.count+1)") {
             imageArray.append(attackImage)
         }
+        
+        
+        //        while let abc = String(utf8String: "\(imageArray.count+1)") {
+        //            stringArray.append(abc)
+        //        }
+        
     }
     
     
@@ -49,7 +64,7 @@ import KeychainAccess
         getUser()
         //APIのカメラ情報を取得
         requestIndex()
-
+        
     }
     
     
@@ -71,7 +86,7 @@ import KeychainAccess
             case .success(let user):
                 self.user = user
                 print("ログインユーザー(\(self.user.name))")
-//                self.label.text = self.user.name
+                //                self.label.text = self.user.name
             case .failure(let err):
                 print(err)
             }
@@ -99,14 +114,30 @@ import KeychainAccess
                 print("レスポンス")
                 if let phod = phods.data {
                     self.phods = phod
-                    print(self.phods)
-//                    print(self.phods.first?.place)
-                    //self.collectionView.reloadData()
+                    //                    print(self.phods)
+                    print(self.phods.first?.place)
+                    self.collectionView.reloadData()
                     print(phods.data?.count)
-                    self.imageView.kf.setImage(with: URL(string: "self.phods.first!.imageUrl"))
                     
-//                    self.imageView.kf.setImage(with: URL(string: self.phods.))
-                  
+                    self.imageView.kf.setImage(with: URL(string: self.phods.first!.imageUrl))
+                    let bb = self.phods.first?.tagType
+                    
+                    
+                    
+                    print("はh")
+                    print(self.phods.first?.tagId)
+                    
+                    
+//                    for i in 0..<min(phods.data!.count, 3) {
+//                        let phods: [String: String?] = [
+//                            "title": phods.data?[i]["title"].string
+//                        ]
+//                        self.phods.append(phods)
+//                    }
+                
+                
+                    
+                    
                 } else {
                     print("データが入っていません")
                 }
@@ -118,50 +149,53 @@ import KeychainAccess
     
     //==================== API終わり ====================//
     
-   
-    
-   
     
     
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        collectionView.frame = view.bounds
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return imageArray.count
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.identifier, for: indexPath)
-//
-//        return cell
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        return CGSize(
-//            width: (view.frame.size.width/3)-3,
-//            height: (view.frame.size.width/3)-3
-//        )
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-//        return 1
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return 1
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets{
-//        return UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
-//    }
-//
-//    //画像をタップ
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        collectionView.deselectItem(at: indexPath, animated: true)
-//        print("Selected section \(indexPath.section) and row \(indexPath.row)")
-//    }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        collectionView.frame = view.bounds
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return phods.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.identifier, for: indexPath) as! PhotoCollectionViewCell
+        
+        //        cell.layer.borderColor
+        //        cell.layer.borderWidth = 0.5
+        
+        cell.imageView.kf.setImage(with: URL(string: phods[indexPath.row].imageUrl))
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(
+            width: (view.frame.size.width/3)-1,
+            height: (view.frame.size.width/3)-1
+            
+        )
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets{
+        return UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
+    }
+    
+    //画像をタップ
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        print("Selected section \(indexPath.section) and row \(indexPath.row)")
+    }
+    
     
 }
 

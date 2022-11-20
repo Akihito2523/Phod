@@ -15,11 +15,17 @@ import KeychainAccess
 
 class CameraViewController: UIViewController {
     
-    
+    var phods: [Phod] = []
     //Constantsに格納しておいた定数を使うための用意
     let consts = Constants.shared
     //Webの認証セッションを入れておく変数
     var session: ASWebAuthenticationSession?
+    
+    
+    //日付
+    let date = Date()
+    let formatter = DateFormatter()
+     
     
     //タブ
     @IBOutlet weak var tagView: UILabel!
@@ -44,14 +50,13 @@ class CameraViewController: UIViewController {
     
     
     override func viewWillAppear(_ animated: Bool) {
-        //        requestIndex()
-    }
     
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        requestIndex()
         tagView.text = ""
         //スワイプ
         swipe()
@@ -62,6 +67,8 @@ class CameraViewController: UIViewController {
         setupInputOutput()
         setupPreviewLayer()
         captureSession.startRunning()
+        
+
     }
     
     //スワイプ時に実行されるメソッド
@@ -69,10 +76,10 @@ class CameraViewController: UIViewController {
         //スワイプ方向による実行処理をcase文で指定
         switch sender.direction {
         case .up:
-            tagView.text = ""
+            tagView.text = phods.first?.tagType
             print("上スワイプ")
         case .down:
-            tagView.text = "デフォルトタグ"
+            tagView.text = "タグ一覧"
             print("下スワイプ")
         default:
             break
@@ -106,9 +113,49 @@ class CameraViewController: UIViewController {
         
     }
     
+    //phodos情報
+    func requestIndex(){
+        let url = URL(string: consts.baseUrl + "/api/phods")!
+        let headers: HTTPHeaders = [
+            .contentType("application/json"),
+            .accept("application/json"),
+            .authorization(bearerToken: consts.token)
+        ]
+        print("Alamofireでリクエスト")
+        AF.request(
+            url,
+            method: .get,
+            encoding: JSONEncoding.default,
+            headers: headers
+        ).responseDecodable(of: Album.self) { response in
+            switch response.result {
+            case .success(let phods):
+                print("レスポンス")
+                if let phod = phods.data {
+                    self.phods = phod
+                    print(self.phods)
+                    
+//                    print(self.phods.first?.place)
+                    //self.collectionView.reloadData()
+                    print(phods.data?.count)
+
+                } else {
+                    print("データが入っていません")
+                }
+            case .failure(let err):
+                print(err)
+            }
+        }
+    }
+    
     
     //投稿のリクエスト
     func createRequest(token: String, image: UIImage) {
+        //時間を取得
+        formatter.dateFormat = "yyyyMMddHH"
+        let time = formatter.string(from: date)
+        print(time)
+        
         guard let url = URL(string: consts.baseUrl + "/api/phods") else { return }
         //画像データを圧縮してデータ型に変換
         guard let imageData = image.jpegData(compressionQuality: 0.01) else {return}
@@ -122,12 +169,15 @@ class CameraViewController: UIViewController {
         AF.upload(
             //multipartFormDataにappendで送信したいデータを追加していく
             multipartFormData: { multipartFormData in
+                
                 //image,title,bodyを送信
                 multipartFormData.append(imageData, withName: "image", fileName: ".jpg")
                 //guard let titleTextData = self.titleTextField.text?.data(using: .utf8) else {return}
-                multipartFormData.append("Swiftのtitle".data(using: .utf8)!, withName: "title")
+                multipartFormData.append("\(time).jpg".data(using: .utf8)!, withName: "title")
                 multipartFormData.append("Swiftのplace".data(using: .utf8)!, withName: "place")
                 multipartFormData.append("Swiftのbody".data(using: .utf8)!, withName: "body")
+//                multipartFormData.append("19".data(using: .utf8)!, withName: "tag_id")
+                multipartFormData.append("1".data(using: .utf8)!, withName: "tag_id")
             },
             to: url,
             //uploadはデフォルトがPOSTメソッドなので省略可能
@@ -140,7 +190,6 @@ class CameraViewController: UIViewController {
                 
             case .failure(let err):
                 print("ERROR:", err)
-                // self.okAlert.showOkAlert(title: "エラー!", message: "\(err)", viewController: self)
             }
         }
     }

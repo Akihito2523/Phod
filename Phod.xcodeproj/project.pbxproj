@@ -18,13 +18,15 @@
 		D7D8785D2919DBAA007FA90D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7D8785B2919DBAA007FA90D /* Main.storyboard */; };
 		D7D8785F2919DBAC007FA90D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7D8785E2919DBAC007FA90D /* Assets.xcassets */; };
 		D7D878622919DBAC007FA90D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7D878602919DBAC007FA90D /* LaunchScreen.storyboard */; };
+		D7DDA4AC29251962001AA797 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7DDA4AB29251962001AA797 /* Api.swift */; };
+		D7DDA4AE2925AF39001AA797 /* AddListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7DDA4AD2925AF39001AA797 /* AddListViewController.swift */; };
+		D7DDA4B02925AF42001AA797 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7DDA4AF2925AF42001AA797 /* TableViewController.swift */; };
 		D7E0C5F1291E26ED007598CE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E0C5F0291E26ED007598CE /* Constants.swift */; };
 		D7E0C5F6291EFDE3007598CE /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E0C5F5291EFDE3007598CE /* Album.swift */; };
 		D7E0C5F8291EFEAF007598CE /* Phod.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E0C5F7291EFEAF007598CE /* Phod.swift */; };
 		D7E0C5FA291EFFD7007598CE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E0C5F9291EFFD7007598CE /* User.swift */; };
 		D7E0C5FC291F0001007598CE /* LoadToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E0C5FB291F0001007598CE /* LoadToken.swift */; };
 		D7E0C5FE291F3AE8007598CE /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E0C5FD291F3AE8007598CE /* TestViewController.swift */; };
-		D7E4195129226D7100A37311 /* ArticleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E4195029226D7100A37311 /* ArticleTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,13 +43,15 @@
 		D7D8785E2919DBAC007FA90D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D7D878612919DBAC007FA90D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D7D878632919DBAC007FA90D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D7DDA4AB29251962001AA797 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
+		D7DDA4AD2925AF39001AA797 /* AddListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddListViewController.swift; sourceTree = "<group>"; };
+		D7DDA4AF2925AF42001AA797 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		D7E0C5F0291E26ED007598CE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D7E0C5F5291EFDE3007598CE /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		D7E0C5F7291EFEAF007598CE /* Phod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phod.swift; sourceTree = "<group>"; };
 		D7E0C5F9291EFFD7007598CE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D7E0C5FB291F0001007598CE /* LoadToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadToken.swift; sourceTree = "<group>"; };
 		D7E0C5FD291F3AE8007598CE /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
-		D7E4195029226D7100A37311 /* ArticleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTableViewCell.swift; sourceTree = "<group>"; };
 		E77D5E0006113EFF8D67F9FD /* Pods-Phod.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Phod.release.xcconfig"; path = "Target Support Files/Pods-Phod/Pods-Phod.release.xcconfig"; sourceTree = "<group>"; };
 		F30F8BCD04D48F5ECFEB8BC5 /* Pods_Phod.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Phod.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -84,7 +88,8 @@
 		D7026B9B291B3AF400F975D3 /* VC */ = {
 			isa = PBXGroup;
 			children = (
-				D7E4195029226D7100A37311 /* ArticleTableViewCell.swift */,
+				D7DDA4AD2925AF39001AA797 /* AddListViewController.swift */,
+				D7DDA4AF2925AF42001AA797 /* TableViewController.swift */,
 				D737668D2923781E00AFE675 /* previewViewController.swift */,
 				D7026B99291B3ADF00F975D3 /* CameraViewController.swift */,
 				D7026BA2291B57A800F975D3 /* PhotoCollectionViewCell.swift */,
@@ -131,6 +136,7 @@
 		D7E0C5F2291E271B007598CE /* models */ = {
 			isa = PBXGroup;
 			children = (
+				D7DDA4AB29251962001AA797 /* Api.swift */,
 				D7E0C5F5291EFDE3007598CE /* Album.swift */,
 				D7E0C5F0291E26ED007598CE /* Constants.swift */,
 				D7E0C5F9291EFFD7007598CE /* User.swift */,
@@ -257,15 +263,17 @@
 			files = (
 				D7E0C5FE291F3AE8007598CE /* TestViewController.swift in Sources */,
 				D7026BA1291B3CA500F975D3 /* AlbumViewController.swift in Sources */,
+				D7DDA4B02925AF42001AA797 /* TableViewController.swift in Sources */,
 				D7E0C5FC291F0001007598CE /* LoadToken.swift in Sources */,
+				D7DDA4AC29251962001AA797 /* Api.swift in Sources */,
 				D7026B9A291B3ADF00F975D3 /* CameraViewController.swift in Sources */,
 				D737668E2923781E00AFE675 /* previewViewController.swift in Sources */,
 				D7E0C5F8291EFEAF007598CE /* Phod.swift in Sources */,
 				D7D878562919DBAA007FA90D /* AppDelegate.swift in Sources */,
 				D7E0C5F6291EFDE3007598CE /* Album.swift in Sources */,
 				D7026BA3291B57A800F975D3 /* PhotoCollectionViewCell.swift in Sources */,
+				D7DDA4AE2925AF39001AA797 /* AddListViewController.swift in Sources */,
 				D7E0C5FA291EFFD7007598CE /* User.swift in Sources */,
-				D7E4195129226D7100A37311 /* ArticleTableViewCell.swift in Sources */,
 				D7D878582919DBAA007FA90D /* SceneDelegate.swift in Sources */,
 				D7026B9F291B3C4A00F975D3 /* SettingViewController.swift in Sources */,
 				D7E0C5F1291E26ED007598CE /* Constants.swift in Sources */,

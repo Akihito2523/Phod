@@ -17,6 +17,7 @@ struct Phod: Codable {
     let createdAt: String
     let userName: String
     let imageUrl: String
+    let tagId: Int
     let tagType: String
 
     
@@ -29,6 +30,7 @@ struct Phod: Codable {
         case createdAt = "created_at"
         case userName = "user_name"
         case imageUrl = "image_url"
+        case tagId = "tag_id"
         case tagType = "tag_type"
     }
 }

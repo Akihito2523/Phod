@@ -14,6 +14,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        //スプラッシュの為に少し起動を遅らせる
+        sleep(1)
+        //ナビゲーションバーの色がデフォルトだと半透明になってしまうので、半透明にさせないよう設定
+        UINavigationBar.appearance().isTranslucent = false
+        
+        let ud = UserDefaults.standard
+        let firstLunchKey = "firstLunch"
+        let firstLunch = [firstLunchKey: true]
+        ud.register(defaults: firstLunch)
+        
         return true
     }
 

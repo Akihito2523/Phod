@@ -6,12 +6,21 @@
 //
 
 import UIKit
+import AVFoundation
+import AuthenticationServices
+import Alamofire
+import KeychainAccess
 
 
 class PhotoCollectionViewCell: UICollectionViewCell {
     static let identifier = "PhotoCollectionViewCell"
     
-    private let imageView: UIImageView = {
+    let consts = Constants.shared
+    var user: User!
+    var phods: [Phod] = []
+    
+    
+    let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -33,6 +42,8 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         imageView.image = images.randomElement()
     }
     
+    
+    
     required init?(coder: NSCoder){
         fatalError()
     }
@@ -40,6 +51,7 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         imageView.frame = contentView.bounds
+    
     }
     
     override func prepareForReuse() {
@@ -47,4 +59,6 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         //スクロールしても画像のトップがおさまる
         //imageView.image = nil
     }
+    
+    
 }
